@@ -1,4 +1,12 @@
 module Pangram (isPangram) where
 
+import Data.Char (toLower)
+import qualified Data.Set as Set
+
+
 isPangram :: String -> Bool
-isPangram text = error "You need to implement this function."
+isPangram = Set.isSubsetOf alphabet
+            . Set.fromList
+            . map toLower
+    where
+        alphabet = Set.fromList ['a'..'z']
