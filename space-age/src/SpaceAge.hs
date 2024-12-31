@@ -10,11 +10,15 @@ data Planet = Mercury
             | Neptune
 
 ageOn :: Planet -> Float -> Float
-ageOn Mercury seconds = seconds / 7600543.81992
-ageOn Venus seconds = seconds / 19414149.052176
-ageOn Earth seconds = seconds / 31557600.0
-ageOn Mars seconds = seconds / 59354032.69008
-ageOn Jupiter seconds = seconds / 374355659.124
-ageOn Saturn seconds = seconds / 929292362.8848
-ageOn Uranus seconds = seconds / 2651370019.3296
-ageOn Neptune seconds = seconds / 5200418560.032
+ageOn planet seconds = seconds / orbitalPeriod planet
+
+orbitalPeriod :: Planet -> Float
+orbitalPeriod planet = 31557600 * case planet of
+    Mercury -> 0.2408467
+    Venus   -> 0.61519726
+    Earth   -> 1.0
+    Mars    -> 1.8808158
+    Jupiter -> 11.862615
+    Saturn  -> 29.447498
+    Uranus  -> 84.016846
+    Neptune -> 164.79132
