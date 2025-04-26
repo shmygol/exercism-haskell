@@ -7,15 +7,15 @@ import Control.Monad(foldM)
 brackets :: Map.Map Char Char
 brackets = Map.fromList [('(', ')'), ('[', ']'), ('{', '}')]
 
-brackets' :: Map.Map Char Char
-brackets' = Map.foldrWithKey (\k v m -> Map.insert v k m) Map.empty brackets
+brackets_reversed :: Map.Map Char Char
+brackets_reversed' = Map.foldrWithKey (flip Map.insert) Map.empty brackets
 
 arePaired :: String -> Bool
 arePaired = (Just [] == ) . foldM f []
   where
     f stack x
       | Map.member x brackets = Just (x:stack)
-      | (Just matchingOpenBracket) <- Map.lookup x brackets'
+      | (Just matchingOpenBracket) <- Map.lookup x brackets_reversed
         = case stack of
             [] -> Nothing
             (prev:stackTail) -> if prev == matchingOpenBracket
