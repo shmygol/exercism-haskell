@@ -3,6 +3,7 @@ version: 2.0.0.8
 
 dependencies:
   - base
+  - containers
 
 library:
   exposed-modules: Brackets
